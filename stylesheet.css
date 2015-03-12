@@ -1,12 +1,13 @@
 .post{  height:15%;
 	font-family:"Menlo";
-	margin-bottom:20px;
+	margin:0px auto 5px auto;
 	max-width:600px;
 	display:flex;
 	flex-direction:column;
 	justify-content: space-between;
 	align-items: center;
 	border:2px solid hsla(159, 100%, 50%, 1);
+
 }
 
 .post > h4 {
