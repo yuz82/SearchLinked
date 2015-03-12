@@ -1,0 +1,16 @@
+.post{  height:15%;
+	font-family:"Menlo";
+	margin-bottom:20px;
+	max-width:600px;
+	display:flex;
+	flex-direction:column;
+	justify-content: space-between;
+	align-items: center;
+	border:2px solid hsla(159, 100%, 50%, 1);
+}
+
+.post > h4 {
+	padding-left:10px;
+	border-bottom:2px dashed hsla(32, 100%, 50%, 1);
+	//background-color:hsla(39, 100%, 50%, 1);
+}
