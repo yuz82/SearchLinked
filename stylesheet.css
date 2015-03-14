@@ -1,21 +1,29 @@
 .post{  height:15%;
+        word-wrap: break-word;
 	font-family:"Menlo";
 	margin:10px auto 10px auto;
-	max-width:600px;
+	max-width:60%;
 	display:flex;
 	flex-direction:column;
 	justify-content: space-between;
 	align-items: center;
 	border:2px solid hsla(159, 100%, 50%, 1);
-
 }
 
 .post > h4 {
-	padding-left:10px;
+	max-width:65%;
 	border-bottom:2px dashed hsla(32, 100%, 50%, 1);
 	//background-color:hsla(39, 100%, 50%, 1);
 }
 
 .post > p{
-	max-width:500px;
+	//border:1px solid hsla(342, 69%, 53%, 1);
+	max-width:85%;
+	}
+
+.post > h3{
+	background-color: hsla(52, 100%, 50%, 1);
+	font-family:monospace;
+	font-size: 18px;
+	padding: 20px 20px 20px 20px;
 	}
