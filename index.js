@@ -16,7 +16,7 @@ function search(query) {
 
 var sent = '{"add": {"doc": {"' +
     'id": "15032",' +
-	'"title": "Movie","Content":"Sun also rises"},"boost": 1.0,"overwrite": true,"commitWithin": 1000}}';
+    '"title": "Movie","Content":"Sun also rises"},"boost": 1.0,"overwrite": true,"commitWithin": 1000}}';
 
 function index() {
     $.ajax({
@@ -36,6 +36,6 @@ function index() {
 $(document).ready(function() {
     console.log(sent);
     index();
-    window.setTimeout('search(\'Sun\')',2000);
+    window.setTimeout('search(\'Sun\')', 2000);
     search('change');
 });
