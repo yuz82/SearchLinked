@@ -23,7 +23,7 @@ function onSuccess(data) {
         }
     }
     // Handle an error response from the API call
-function onError(error) {
+  function onError(error) {
     console.log(error);
 }
 
