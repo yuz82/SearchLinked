@@ -3,16 +3,16 @@
     word-wrap: break-word;
     font-family: "Menlo";
     margin: 10px auto 10px auto;
-    max-width: 60%;
+       max-width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid hsla(159, 100%, 50%, 1);
+    border: 2px solid hsl(153, 100%, 81%);
 }
 .post > h4 {
     max-width: 65%;
-    border-bottom: 2px dashed hsla(32, 100%, 50%, 1);
+    border-bottom: 2px dashed hsl(349, 100%, 72%);
     //background-color:hsla(39, 100%, 50%, 1);
 }
 .post > p {

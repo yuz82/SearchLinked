@@ -1,7 +1,6 @@
 /**
  * Created by liaokaien on 3/11/15.
  */
-
 // Setup an event listener to make an API call once auth is complete
 function onLinkedInLoad() {
         IN.Event.on(IN, "auth", getProfileData);
@@ -18,18 +17,22 @@ function onSuccess(data) {
             var d = new Date();
             console.log(thisTime, d.getTime());
             setTimeout("getTopic(groups[" + i + "])", 1500 * i);
-
-
         }
     }
     // Handle an error response from the API call
+
   function onError(error) {
     console.log(error);
 }
 
 // Use the API call wrapper to request the member's basic profile data
-function getProfileData() {
 
+function onError(error) {
+        console.log(error);
+    }
+    // Use the API call wrapper to request the member's basic profile data
+
+function getProfileData() {
     IN.API.Raw("/people/~:(group-memberships)").result(onSuccess).error(onError);
 }
 
@@ -37,8 +40,8 @@ function getTopic(group) {
     var d = new Date();
     console.log("getTopic:", d.getTime(), group.name);
     this.groupName = group.name;
-    IN.API.Raw("/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=30")
-        .result(success).error(onError);
+    var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=30";
+    IN.API.Raw(q).result(success).error(onError);
 }
 
 function success(data) {
@@ -53,6 +56,7 @@ function success(data) {
         var date = new Date(posts[i].creationTimestamp);
         var sn = $('.post').length;
         $('body').append('<section class=\'post\'></section>');
+        var post = $('.post').eq(sn);
         $('.post').eq(sn).append('<h3>Group:&nbsp' + groupName + '</h3>');
         $('.post').eq(sn).append('<h4>title&nbsp</h4>');
         $('.post').eq(sn).append('<p>' + title + '</p>');
@@ -62,8 +66,5 @@ function success(data) {
         $('.post').eq(sn).append('<p>' + summary + '</p>');
         $('.post').eq(sn).append('<h4>date&nbsp</h4>');
         $('.post').eq(sn).append('<p>' + date + '</p>');
-
-        //$('.post').eq(i).append('<p>groups:&nbsp'+groups[i].name+'</p>');
-
     }
 }
