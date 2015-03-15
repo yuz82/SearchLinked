@@ -37,8 +37,8 @@ function getTopic(group) {
     var d = new Date();
     console.log("getTopic:", d.getTime(), group.name);
     this.groupName = group.name;
-    IN.API.Raw("/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=30")
-        .result(success).error(onError);
+    var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=30";
+    IN.API.Raw(q).result(success).error(onError);
 }
 
 function success(data) {
@@ -53,17 +53,17 @@ function success(data) {
         var date = new Date(posts[i].creationTimestamp);
         var sn = $('.post').length;
         $('body').append('<section class=\'post\'></section>');
-        $('.post').eq(sn).append('<h3>Group:&nbsp' + groupName + '</h3>');
-        $('.post').eq(sn).append('<h4>title&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + title + '</p>');
-        $('.post').eq(sn).append('<h4>creator&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + creator + '</p>');
-        $('.post').eq(sn).append('<h4>summary&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + summary + '</p>');
-        $('.post').eq(sn).append('<h4>date&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + date + '</p>');
+        var post = $('.post');
+        post.eq(sn).append('<h4>title&nbsp</h4>');
+        post.eq(sn).append('<p>' + title + '</p>');
+        post.eq(sn).append('<h4>creator&nbsp</h4>');
+        post.eq(sn).append('<p>' + creator + '</p>');
+        post.eq(sn).append('<h4>summary&nbsp</h4>');
+        post.eq(sn).append('<p>' + summary + '</p>');
+        post.eq(sn).append('<h4>date&nbsp</h4>');
+        post.eq(sn).append('<p>' + date + '</p>');
 
-        //$('.post').eq(i).append('<p>groups:&nbsp'+groups[i].name+'</p>');
+        //post.eq(i).append('<p>groups:&nbsp'+groups[i].name+'</p>');
 
     }
 }

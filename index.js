@@ -14,17 +14,17 @@ function search(query) {
     });
 }
 
-var sent = '{"add": {"doc": {"' +
-    'id": "15032",' +
-    '"title": "Movie","Content":"Sun also rises"},"boost": 1.0,"overwrite": true,"commitWithin": 1000}}';
+var sent = '{\'add\': {\'doc\': {\'' +
+    'id\': \'15032\',' +
+    '\'title\': \'Movie\',\'Content\':\'Sun also rises\'},\'boost\': 1.0,\'overwrite\': true,\'commitWithin\': 1000}}';
 
 function index() {
     $.ajax({
         url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
-        contentType: "application/json",
+        contentType: 'application/json,
         processData: false,
         data: sent,
-        type: "POST",
+        type: POST,
         success: function(data) { /* process e.g. data.response.docs... */
             console.log(data);
         }
