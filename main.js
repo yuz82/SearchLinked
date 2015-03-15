@@ -1,7 +1,6 @@
 /**
  * Created by liaokaien on 3/11/15.
  */
-
 // Setup an event listener to make an API call once auth is complete
 function onLinkedInLoad() {
         IN.Event.on(IN, "auth", getProfileData);
@@ -18,18 +17,14 @@ function onSuccess(data) {
             var d = new Date();
             console.log(thisTime, d.getTime());
             setTimeout("getTopic(groups[" + i + "])", 1500 * i);
-
-
         }
     }
     // Handle an error response from the API call
 function onError(error) {
-    console.log(error);
-}
-
-// Use the API call wrapper to request the member's basic profile data
+        console.log(error);
+    }
+    // Use the API call wrapper to request the member's basic profile data
 function getProfileData() {
-
     IN.API.Raw("/people/~:(group-memberships)").result(onSuccess).error(onError);
 }
 
@@ -53,17 +48,16 @@ function success(data) {
         var date = new Date(posts[i].creationTimestamp);
         var sn = $('.post').length;
         $('body').append('<section class=\'post\'></section>');
-        var post = $('.post');
-        post.eq(sn).append('<h4>title&nbsp</h4>');
-        post.eq(sn).append('<p>' + title + '</p>');
-        post.eq(sn).append('<h4>creator&nbsp</h4>');
-        post.eq(sn).append('<p>' + creator + '</p>');
-        post.eq(sn).append('<h4>summary&nbsp</h4>');
-        post.eq(sn).append('<p>' + summary + '</p>');
-        post.eq(sn).append('<h4>date&nbsp</h4>');
-        post.eq(sn).append('<p>' + date + '</p>');
-
+        var post = $('.post').eq(sn);
+        $('.post').append('<h3>Group:&nbsp' + groupName + '</h3>');
+        post.append('<h4>title&nbsp</h4>');
+        post.append('<p>' + title + '</p>');
+        post.append('<h4>creator&nbsp</h4>');
+        post.append('<p>' + creator + '</p>');
+        post.append('<h4>summary&nbsp</h4>');
+        post.append('<p>' + summary + '</p>');
+        post.append('<h4>date&nbsp</h4>');
+        post.append('<p>' + date + '</p>');
         //post.eq(i).append('<p>groups:&nbsp'+groups[i].name+'</p>');
-
     }
 }
