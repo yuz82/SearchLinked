@@ -20,18 +20,14 @@ function onSuccess(data) {
         }
     }
     // Handle an error response from the API call
-
-  function onError(error) {
-    console.log(error);
-}
-
-// Use the API call wrapper to request the member's basic profile data
-
 function onError(error) {
         console.log(error);
     }
     // Use the API call wrapper to request the member's basic profile data
-
+function onError(error) {
+        console.log(error);
+    }
+    // Use the API call wrapper to request the member's basic profile data
 function getProfileData() {
     IN.API.Raw("/people/~:(group-memberships)").result(onSuccess).error(onError);
 }
@@ -56,7 +52,6 @@ function success(data) {
         var date = new Date(posts[i].creationTimestamp);
         var sn = $('.post').length;
         $('body').append('<section class=\'post\'></section>');
-        var post = $('.post').eq(sn);
         $('.post').eq(sn).append('<h3>Group:&nbsp' + groupName + '</h3>');
         $('.post').eq(sn).append('<h4>title&nbsp</h4>');
         $('.post').eq(sn).append('<p>' + title + '</p>');
