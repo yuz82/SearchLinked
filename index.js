@@ -14,16 +14,59 @@ function search(query) {
     });
 }
 
-var sent = '{\'add\': {\'doc\': {\'' +
-    'id\': \'15032\',' +
-    '\'title\': \'Movie\',\'Content\':\'Sun also rises\'},\'boost\': 1.0,\'overwrite\': true,\'commitWithin\': 1000}}';
-
-function index() {
+function clean() {
+    var idSet = [];
+    $.ajax({
+        'url': 'http://www.liaokaien.com:8983/solr/search/select',
+        'data': {
+            'wt': 'json',
+            'q': '*%3A*'
+        },
+        'success': function(data) {
+            var docs = data.response['docs'];
+            for (var i = 0; i < docs.length; i++) {
+                idSet.push(docs[i].id);
+            }
+        }
+    });
+    //clean docs in this idset
     $.ajax({
         url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
         contentType: 'application/json',
         processData: false,
-        data: sent,
+        data: data,
+        type: 'POST',
+        'data': {
+            'delete': idSet
+        },
+        'success': function(data) {
+            console.log('Success to clean the collection');
+        }
+    });
+}
+
+
+
+function Document(id, title, creator, summary, time) {
+    this.add = new Object();
+    this.add.doc = new Object();
+    this.add.doc.id = id;
+    this.add.doc.title = title;
+    this.add.doc.time = time;
+    this.add.doc.summary = summary;
+    this.add.doc.creator = creator;
+    this.add.boost = 1.0;
+    this.add.overwrite = true;
+    this.add.commitWithin = 1000;
+};
+
+function index() {
+    var data = new Document();
+    $.ajax({
+        url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
+        contentType: 'application/json',
+        processData: false,
+        data: JSON.Stringify(data),
         type: 'POST',
         success: function(data) { /* process e.g. data.response.docs... */
             console.log(data);
@@ -32,10 +75,3 @@ function index() {
 }
 
 //
-
-$(document).ready(function() {
-    console.log(sent);
-    index();
-    window.setTimeout('search(\'Sun\')', 2000);
-    search('change');
-});

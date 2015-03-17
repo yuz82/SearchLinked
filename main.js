@@ -19,15 +19,12 @@ function onSuccess(data) {
             setTimeout("getTopic(groups[" + i + "])", 1500 * i);
         }
     }
-    // Handle an error response from the API call
+    // Handle an error response from the API cal
 function onError(error) {
-        console.log(error);
-    }
-    // Use the API call wrapper to request the member's basic profile data
-function onError(error) {
-        console.log(error);
-    }
-    // Use the API call wrapper to request the member's basic profile data
+    console.log(error);
+}
+
+// Use the API call wrapper to request the member's basic profile data
 function getProfileData() {
     IN.API.Raw("/people/~:(group-memberships)").result(onSuccess).error(onError);
 }
@@ -37,10 +34,10 @@ function getTopic(group) {
     console.log("getTopic:", d.getTime(), group.name);
     this.groupName = group.name;
     var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=30";
-    IN.API.Raw(q).result(success).error(onError);
+    IN.API.Raw(q).result(insert).error(onError);
 }
 
-function success(data) {
+function insert(data) {
     var d = new Date();
     console.log("Success:", d.getTime(), groupName);
     var posts = data.values;
