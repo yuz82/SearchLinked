@@ -12,7 +12,7 @@ function onSuccess(data) {
         for (var i = 0; i < data.groupMemberships._total; i++) {
             groups.push(data.groupMemberships.values[i].group);
         }
-        for (var i = 0; i < groups.length; i++) {
+        for (i = 0; i < groups.length; i++) {
             window.thisTime = i;
             var d = new Date();
             console.log(thisTime, d.getTime());
