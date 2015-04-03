@@ -37,11 +37,12 @@ html,body {
     background-color: rgba(0, 0, 0, 0.45);
     border-radius: 2%;
 
-    p {
-      text-align: center;
-      padding-top: 20px;
-      color: whitesmoke;
-      font-family: $droid;
+    span {
+      margin: 0px auto;
+      position: relative;
+      top: 20px;
+      
+      
     }
 
   }
