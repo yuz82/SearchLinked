@@ -50,7 +50,7 @@ function insert(data) {
         var summary = posts[i].summary;
         var date = new Date(posts[i].creationTimestamp);
         var sn = $('.post').length;
-        location = "http://www.liaokaien.com:8983/solr/search/index.html";
+        $('body').html('<div></div>');
         $('body').append('<section class=\'post\'></section>');
         $('.post').eq(sn).append('<h3>Group:&nbsp' + groupName + '</h3>');
         $('.post').eq(sn).append('<h4>title&nbsp</h4>');
