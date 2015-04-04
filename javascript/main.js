@@ -3,6 +3,7 @@
  */
 // Setup an event listener to make an API call once auth is complete
 function onLinkedInLoad() {
+    location = "http://www.liaokaien.com:8983/solr/search/index.html";
         IN.Event.on(IN, "auth", getProfileData);
     }
     // Handle the successful return from the API call
