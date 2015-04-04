@@ -13,6 +13,7 @@ function onSuccess(data) {
         for (var i = 0; i < data.groupMemberships._total; i++) {
             groups.push(data.groupMemberships.values[i].group);
         }
+    $('body').html('');
         for (i = 0; i < groups.length; i++) {
             window.thisTime = i;
             var d = new Date();
@@ -50,7 +51,7 @@ function insert(data) {
         var summary = posts[i].summary;
         var date = new Date(posts[i].creationTimestamp);
         var sn = $('.post').length;
-        $('body').html('<div></div>');
+
         $('body').append('<section class=\'post\'></section>');
         $('.post').eq(sn).append('<h3>Group:&nbsp' + groupName + '</h3>');
         $('.post').eq(sn).append('<h4>title&nbsp</h4>');
