@@ -4,16 +4,78 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>SearchLinked</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato|Droid+Serif|Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- <link rel="stylesheet" href="stylesheet/index.css"/> -->
+    <link rel="stylesheet" href="stylesheet/normalize.css"/>
+     <link rel="stylesheet" href="stylesheet/home.css"/>
 </head>
 
 <body>
 <nav>
-    <p id = "logo">in</p>
-    <input type="search"/>
+
+    <img src="images/icon.png" alt="search linkedin"/>
+    <ul class = "select">
+        <li class="select-title">All groups<i class="fa fa-caret-down"></i></li>
+        <li class="options">
+        <ul>
+            <li class="option">All groups</li>
+            <li class="option">iSchool</li>
+            <li class="option">University of Pittsburgh</li>
+        </ul>
+        </li>
+
+    </ul>
+
+    <input type="search" placeholder="Search by keywords"/>
+    <input type="button" value="Search"/>
 
 </nav>
+
+<section class="main">
+    <article class="post">
+        <section class="group"><img src="https://media.licdn.com/media/p/4/005/061/113/2fecf2d.png" alt="logo"/>
+            iSchool</section>
+        <section class="title">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet <br/>
+            <span class="time">2015-01-01 | </span>
+            <span class="author">by @author</span>
+        </section>
+
+        <section class="summary"><span>Summary</span>
+            Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+            Curabitur erat mauris, aliquet nec tellus at,
+            sollicitudin consectetur magna. Mauris sem felis,
+            vestibulum quis scelerisque ac, iaculis sed lectus.
+            Duis scelerisque eu libero ut auctor. Ut efficitur metus
+            id nunc elementum luctus. Suspendisse turpis ipsum,
+            rhoncus nec sem et, posuere pulvinar lacus. Curabitur erat risus,
+            auctor non mauris ac, dictum pretium nisl. Proin sit amet velit odio.
+            Maecenas tempus sollicitudin volutpat. Sed mollis ex in dui tincidunt,
+            id posuere justo vulputate. Mauris eu nunc semper, auctor neque ut,
+            fringilla ante. Praesent eget accumsan dolor.
+            Integer nec risus sed orci pulvinar pharetra non quis tortor.
+            Sed luctus, erat consectetur hendrerit porttitor,
+            urna orci mollis diam, in sollicitudin nulla mi ac mi.
+            Nam euismod euismod risus, id mollis nisl gravida ac.
+        </section>
+        <section class="info">
+            <div class="comments"><span>Comments</span>(0)</div>
+            <div class="likes"><span>Likes</span>(0)</div>
+            <div class="follow"><span>Follow</span></div>
+        </section>
+        <section class="operation">
+
+            <input type="text" placeholder="Add comment"/>
+            <input type="button" value="Submit"/>
+        </section>
+    </article>
+</section>
+
+<footer>
+    <p>Supported by Solr</p>
+    <p>&nbsp;&nbsp;|&nbsp;&nbsp;IR Final Project Group 4&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+    <p id="info">About us</p>
+</footer>
 <!--Other Script. You can not move or change them -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="javascript/index.js"></script>
