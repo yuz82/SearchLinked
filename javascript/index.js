@@ -1,23 +1,61 @@
 /**
  * Created by liaokaien on 3/11/15.
  */
-var compoment = {
-    post: $('<article></article>').addClass('post'),
-    group: $('<section></section>').addClass('group')
+function Components() {
+
+    this.post = $('<article></article>').addClass('post');
+    this.group = $('<section></section>').addClass('group');
+    this.title = $('<section></section>').addClass('title');
+    this.info = $('<section></section>').addClass('info');
+    this.operation = $('<section></section>').addClass('operation');
+    this.summary = $('<section></section>').addClass('summary');
+    this.time = $('<span></span>').addClass('time');
+    this.author = $('<span></span>').addClass('author');
+    this.comments = $('<div></div>').addClass('comments');
+    this.likes = $('<div></div>').addClass('likes');
+    this.follow = $('<div></div>').addClass('follow');
+    this.textbox = $('<input></input').attr('type', 'text');
+    this.button = $('<input></input').attr('type', 'button');
 };
 
-function init() {
+function init(user) {
     var query = '*:*';
+    //console.log(user);
     $.ajax({
-        'url': 'http://www.liaokaien.com:8983/solr/search/select?q=' + encodeURIComponent(query) +
-            '&wt=json',
+        'url': 'http://www.liaokaien.com:8983/solr/search/select?rows=200&fq=user%3D' + user + '&q=' + encodeURIComponent(query) + '&wt=json',
         type: 'GET',
         'success': function(data) { /* process e.g. data.response.docs... */
-            console.log(typeof data);
+
             var docs = JSON.parse(data).response.docs;
+            console.log(docs.length);
             for (var i = 0; i < docs.length; i++) {
-                console.log(docs.id);
-                $('.main').append(compoment.post);
+                var element = new Components();
+                $('.main').append(element.post.attr('id', docs[i].id));
+                console.log(docs[i].id);
+                var post = $('#' + docs[i].id);
+                post.append(element.group.text(docs[i].group));
+                post.append(element.title.text(docs[i].title));
+                post.append(element.summary.html('<span>Summary</span>' + docs[i].summary));
+                post.append(element.info);
+                post.append(element.operation);
+                var title = post.find('.title');
+                title.append('<br>');
+                var time = docs[i].time[0];
+                console.log(docs[i].time);
+                time = time.replace('T', ' ');
+                time = time.replace('Z', ' ');
+                time = time.substring(0, 10);
+                title.append(element.time.text(time));
+                title.append(element.author.text(' | by ' + docs[i].creator));
+                var info = post.find('.info');
+                info.append(element.comments.html('<span>Comments</span>(' + '0)'));
+                info.append(element.likes.html('<span>Likes</span>(' + '0)'));
+                info.append(element.follow.html('<span>Follow</span>'));
+                var operation = post.find('.operation');
+                operation.append(element.textbox.attr('placeholder', 'Add a comment'));
+                operation.append(element.button.attr('value', 'Submit'));
+
+
             }
         }
     });
@@ -27,10 +65,23 @@ function search(q) {
     var query = q;
     $.ajax({
         'url': 'http://www.liaokaien.com:8983/solr/search/select?q=' + encodeURIComponent(query) +
-            '&wt=json',
+            '&wt=json&rows=200',
         type: 'GET',
         'success': function(data) { /* process e.g. data.response.docs... */
-            // console.log(data);
+
+            var docs = JSON.parse(data).response.docs;
+            var results = [];
+            for (var i = 0; i < docs.length; i++) {
+                results.push(docs[i].id);
+            }
+            console.log(results);
+            $(".post").each(function() {
+                $(this).show();
+                if (results.indexOf($(this).attr('id')) < 0) {
+                    $(this).hide();
+                }
+
+            });
 
         }
     });
