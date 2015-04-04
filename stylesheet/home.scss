@@ -4,6 +4,10 @@ $droid: 'Droid Serif', serif;
 $opensans :'Open Sans', sans-serif;
 
 nav{
+  position: fixed;
+  width: 100%;
+  margin-top: -48px;
+  z-index: 999;
   color: #ffffff;
   display: flex;
   padding-top: 5px;
@@ -11,7 +15,7 @@ nav{
   padding-bottom: 5px;
   justify-content: flex-start;
   align-items:center;
-  background-color: #101f28;
+  background-color: rgba(0, 0, 0, 0.75);
   border-bottom: solid #008889 5px;
 
   img{
@@ -81,9 +85,13 @@ nav{
       border-bottom: none;
 
       img{
-        width:36px;
-        height:36px;
-        margin:10px;
+        width:64px;
+        height:64px;
+        position: relative;
+        top:-25px;
+        right:50px;
+        border: solid rgba(206, 206, 206, 0.48) 2px;
+
       }
     }
     .title{
