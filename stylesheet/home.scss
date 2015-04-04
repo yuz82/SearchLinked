@@ -79,6 +79,12 @@ nav{
       font-family: $opensans;
       font-size: 2em;
       border-bottom: none;
+
+      img{
+        width:36px;
+        height:36px;
+        margin:10px;
+      }
     }
     .title{
       font-family: $lato;
