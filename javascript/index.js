@@ -3,6 +3,7 @@
  */
 
 
+
 function search(q, f) {
 
     var query = q;
@@ -51,7 +52,7 @@ function clear() {
 }
 
 
-function Document(id, title, creator, summary, time) {
+function Document(id, title, creator, summary, time, group, user) {
     this.add = {};
     this.add.doc = {};
     this.add.doc.id = id;
@@ -59,15 +60,18 @@ function Document(id, title, creator, summary, time) {
     this.add.doc.time = time;
     this.add.doc.summary = summary;
     this.add.doc.creator = creator;
+    this.add.doc.user = user;
+    this.add.doc.group = group;
+
     this.add.boost = 1.0;
     this.add.overwrite = true;
     this.add.commitWithin = 1000;
 }
 
-function index(id, title, creator, summary, time) {
+function index(id, title, creator, summary, time, group, user) {
 
-    var data = new Document(id, title, creator, summary, time);
-    //console.log('data:', data);
+    var data = new Document(id, title, creator, summary, time, group, user);
+    console.log('data:', data.add.doc);
     $.ajax({
         url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
         contentType: 'application/json',

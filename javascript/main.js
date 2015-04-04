@@ -5,7 +5,9 @@
 
 var args = {
     count: 0,
-    all: 0
+    all: 0,
+    group: [],
+    name: ''
 };
 
 function onLinkedInLoad() {
@@ -17,9 +19,12 @@ function onLinkedInLoad() {
     // Handle the successful return from the API call
 function onSuccess(data) {
         var groups = [];
-        window.groups = groups;
+        args.name = data.id;
+        console.log(args.name);
+
         for (var i = 0; i < data.groupMemberships._total; i++) {
             groups.push(data.groupMemberships.values[i].group);
+            args.group.push(data.groupMemberships.values[i].group.name);
         }
         args.all = groups.length;
         for (i = 0; i < groups.length; i++) {
@@ -36,14 +41,13 @@ function onError(error) {
 
 // Use the API call wrapper to request the member's basic profile data
 function getProfileData() {
-    IN.API.Raw("/people/~:(group-memberships)").result(onSuccess).error(onError);
+    IN.API.Raw("/people/~:(id,group-memberships)").result(onSuccess).error(onError);
 }
 
 function getTopic(group) {
     var d = new Date();
     console.log("getTopic:", d.getTime(), group.name);
-    this.groupName = group.name;
-    var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=30";
+    var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=50";
     //console.log(q);
     IN.API.Raw(q).result(insert).error(onError);
 }
@@ -61,9 +65,12 @@ function insert(data) {
         var summary = posts[i].summary;
         var timestamp = new Date(posts[i].creationTimestamp);
         var id = posts[i].id;
-        index(id, title, creator, summary, timestamp);
+        var user = args.name;
+        var group = args.group[args.count - 1];
+        console.log(user, group);
+        index(id, title, creator, summary, timestamp, group, user);
     }
     if (args.count == args.all) {
-        location = 'http://www.liaokaien.com:8983/solr/search/index.html';
+        //location = 'http://www.liaokaien.com:8983/solr/search/index.html';
     }
 }
