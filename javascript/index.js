@@ -3,13 +3,13 @@
  */
 
 
-function search(query) {
+function search(q, f) {
+
+    var query = q;
+    //var filter = f.replace('=', '%3D');
     $.ajax({
-        'url': 'http://www.liaokaien.com:8983/solr/search/select',
-        'data': {
-            'wt': 'json',
-            'q': encodeURIComponent(query)
-        },
+        'url': 'http://www.liaokaien.com:8983/solr/search/select?q=' + encodeURIComponent(query) +
+            '&wt=json',
         type: 'GET',
         'success': function(data) { /* process e.g. data.response.docs... */
             console.log(data);
