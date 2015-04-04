@@ -1,19 +1,37 @@
 /**
  * Created by liaokaien on 3/11/15.
  */
+var compoment = {
+    post: $('<article></article>').addClass('post'),
+    group: $('<section></section>').addClass('group')
+};
 
-
-
-function search(q, f) {
-
-    var query = q;
-    //var filter = f.replace('=', '%3D');
+function init() {
+    var query = '*:*';
     $.ajax({
         'url': 'http://www.liaokaien.com:8983/solr/search/select?q=' + encodeURIComponent(query) +
             '&wt=json',
         type: 'GET',
         'success': function(data) { /* process e.g. data.response.docs... */
-            console.log(data);
+            console.log(typeof data);
+            var docs = JSON.parse(data).response.docs;
+            for (var i = 0; i < docs.length; i++) {
+                console.log(docs.id);
+                $('.main').append(compoment.post);
+            }
+        }
+    });
+}
+
+function search(q) {
+    var query = q;
+    $.ajax({
+        'url': 'http://www.liaokaien.com:8983/solr/search/select?q=' + encodeURIComponent(query) +
+            '&wt=json',
+        type: 'GET',
+        'success': function(data) { /* process e.g. data.response.docs... */
+            // console.log(data);
+
         }
     });
 }
@@ -71,7 +89,7 @@ function Document(id, title, creator, summary, time, group, user) {
 function index(id, title, creator, summary, time, group, user) {
 
     var data = new Document(id, title, creator, summary, time, group, user);
-    console.log('data:', data.add.doc);
+    //console.log('data:', data.add.doc.id);
     $.ajax({
         url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
         contentType: 'application/json',

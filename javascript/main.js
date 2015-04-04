@@ -67,10 +67,10 @@ function insert(data) {
         var id = posts[i].id;
         var user = args.name;
         var group = args.group[args.count - 1];
-        console.log(user, group);
+        //console.log(user, group);
         index(id, title, creator, summary, timestamp, group, user);
     }
     if (args.count == args.all) {
-        //location = 'http://www.liaokaien.com:8983/solr/search/index.html';
+        location = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + args.name;
     }
 }
