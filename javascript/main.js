@@ -2,9 +2,17 @@
  * Created by liaokaien on 3/11/15.
  */
 // Setup an event listener to make an API call once auth is complete
+
+var args = {
+    count: 0,
+    all: 0
+};
+
 function onLinkedInLoad() {
-    console.log('onload');
+        console.log('onload');
+        //clear();
         IN.Event.on(IN, "auth", getProfileData);
+
     }
     // Handle the successful return from the API call
 function onSuccess(data) {
@@ -13,12 +21,12 @@ function onSuccess(data) {
         for (var i = 0; i < data.groupMemberships._total; i++) {
             groups.push(data.groupMemberships.values[i].group);
         }
-    $('body').html('');
+        args.all = groups.length;
         for (i = 0; i < groups.length; i++) {
             window.thisTime = i;
             var d = new Date();
             console.log(thisTime, d.getTime());
-            setTimeout("getTopic(groups[" + i + "])", 1500 * i);
+            getTopic(groups[i]);
         }
     }
     // Handle an error response from the API cal
@@ -28,7 +36,6 @@ function onError(error) {
 
 // Use the API call wrapper to request the member's basic profile data
 function getProfileData() {
-
     IN.API.Raw("/people/~:(group-memberships)").result(onSuccess).error(onError);
 }
 
@@ -37,30 +44,26 @@ function getTopic(group) {
     console.log("getTopic:", d.getTime(), group.name);
     this.groupName = group.name;
     var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=30";
+    //console.log(q);
     IN.API.Raw(q).result(insert).error(onError);
 }
 
 function insert(data) {
     var d = new Date();
-    console.log("Success:", d.getTime(), groupName);
     var posts = data.values;
+
+    args.count++;
+
     for (var i = 0; i < posts.length; i++) {
         var creator = posts[i].creator.firstName + " ";
         creator += posts[i].creator.lastName;
         var title = posts[i].title;
         var summary = posts[i].summary;
-        var date = new Date(posts[i].creationTimestamp);
-        var sn = $('.post').length;
-
-        $('body').append('<section class=\'post\'></section>');
-        $('.post').eq(sn).append('<h3>Group:&nbsp' + groupName + '</h3>');
-        $('.post').eq(sn).append('<h4>title&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + title + '</p>');
-        $('.post').eq(sn).append('<h4>creator&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + creator + '</p>');
-        $('.post').eq(sn).append('<h4>summary&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + summary + '</p>');
-        $('.post').eq(sn).append('<h4>date&nbsp</h4>');
-        $('.post').eq(sn).append('<p>' + date + '</p>');
+        var timestamp = new Date(posts[i].creationTimestamp);
+        var id = posts[i].id;
+        index(id, title, creator, summary, timestamp);
+    }
+    if (args.count == args.all) {
+        location = 'http://www.liaokaien.com:8983/solr/search/index.html';
     }
 }
