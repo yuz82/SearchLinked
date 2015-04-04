@@ -12,7 +12,6 @@ var args = {
 
 function onLinkedInLoad() {
         console.log('onload');
-        //clear();
         IN.Event.on(IN, "auth", getProfileData);
 
     }
@@ -64,11 +63,18 @@ function insert(data) {
         var title = posts[i].title;
         var summary = posts[i].summary;
         var timestamp = new Date(posts[i].creationTimestamp);
+        if (posts[i].creator.pictureUrl) {
+            var image = posts[i].creator.pictureUrl;
+        } else {
+            image = 'images/favicon.png';
+
+        }
+
+        //console.log('image', image);
         var id = posts[i].id;
         var user = args.name;
         var group = args.group[args.count - 1];
-        //console.log(user, group);
-        index(id, title, creator, summary, timestamp, group, user);
+        index(id, title, creator, summary, timestamp, group, user, image);
     }
     if (args.count == args.all) {
         location = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + args.name;

@@ -14,11 +14,13 @@ function Components() {
     this.comments = $('<div></div>').addClass('comments');
     this.likes = $('<div></div>').addClass('likes');
     this.follow = $('<div></div>').addClass('follow');
-    this.textbox = $('<input></input').attr('type', 'text');
-    this.button = $('<input></input').attr('type', 'button');
+    this.textbox = $('<input/>').attr('type', 'text');
+    this.button = $('<input/>').attr('type', 'button');
+    this.image = $('<img></img>').attr('alt', 'creator\'s avatar');
 };
 
 function init(user) {
+
     var query = '*:*';
     //console.log(user);
     $.ajax({
@@ -27,26 +29,29 @@ function init(user) {
         'success': function(data) { /* process e.g. data.response.docs... */
 
             var docs = JSON.parse(data).response.docs;
-            console.log(docs.length);
+            //console.log(docs.length);
             for (var i = 0; i < docs.length; i++) {
                 var element = new Components();
                 $('.main').append(element.post.attr('id', docs[i].id));
-                console.log(docs[i].id);
+                //console.log(docs[i].id);
                 var post = $('#' + docs[i].id);
                 post.append(element.group.text(docs[i].group));
                 post.append(element.title.text(docs[i].title));
                 post.append(element.summary.html('<span>Summary</span>' + docs[i].summary));
                 post.append(element.info);
                 post.append(element.operation);
+                var group = post.find('.group');
+                console.log(docs[i].image[0]);
+                group.prepend(element.image.attr('src', docs[i].image[0]));
                 var title = post.find('.title');
                 title.append('<br>');
+                title.append(element.time.text(time));
+                title.append(element.author.text(' | by ' + docs[i].creator));
                 var time = docs[i].time[0];
-                console.log(docs[i].time);
+                //console.log(docs[i].time);
                 time = time.replace('T', ' ');
                 time = time.replace('Z', ' ');
                 time = time.substring(0, 10);
-                title.append(element.time.text(time));
-                title.append(element.author.text(' | by ' + docs[i].creator));
                 var info = post.find('.info');
                 info.append(element.comments.html('<span>Comments</span>(' + '0)'));
                 info.append(element.likes.html('<span>Likes</span>(' + '0)'));
@@ -74,7 +79,7 @@ function search(q) {
             for (var i = 0; i < docs.length; i++) {
                 results.push(docs[i].id);
             }
-            console.log(results);
+            //console.log(results);
             $(".post").each(function() {
                 $(this).show();
                 if (results.indexOf($(this).attr('id')) < 0) {
@@ -121,7 +126,7 @@ function clear() {
 }
 
 
-function Document(id, title, creator, summary, time, group, user) {
+function Document(id, title, creator, summary, time, group, user, image) {
     this.add = {};
     this.add.doc = {};
     this.add.doc.id = id;
@@ -129,6 +134,7 @@ function Document(id, title, creator, summary, time, group, user) {
     this.add.doc.time = time;
     this.add.doc.summary = summary;
     this.add.doc.creator = creator;
+    this.add.doc.image = image;
     this.add.doc.user = user;
     this.add.doc.group = group;
 
@@ -137,10 +143,11 @@ function Document(id, title, creator, summary, time, group, user) {
     this.add.commitWithin = 1000;
 }
 
-function index(id, title, creator, summary, time, group, user) {
+function index(id, title, creator, summary, time, group, user, image) {
 
-    var data = new Document(id, title, creator, summary, time, group, user);
-    //console.log('data:', data.add.doc.id);
+
+    var data = new Document(id, title, creator, summary, time, group, user, image);
+    //console.log('data:', data.add.doc.image);
     $.ajax({
         url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
         contentType: 'application/json',
