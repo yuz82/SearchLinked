@@ -59,7 +59,6 @@ nav{
     margin-right: 32px;
     height: 26px;
     font-family: $lato;
-
   }
 }
 
@@ -91,6 +90,7 @@ nav{
         top:-25px;
         right:50px;
         border: solid rgba(206, 206, 206, 0.48) 2px;
+        border-radius: 100%;
 
       }
     }
