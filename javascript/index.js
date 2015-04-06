@@ -60,9 +60,9 @@ function init(user) {
                     time = time.replace('Z', ' ');
                     time = time.substring(0, 10);
                     var info = post.find('.info');
-                    var isFollowing = docs[i].isFollowing[0];
+                    var isFollowing = (docs[i].isFollowing[0] == true ? 'Unfollow' : 'follow');
                     var likes = docs[i].likes[0];
-                    var isLiked = docs[i].isLiked[0];
+                    var isLiked = (docs[i].isLiked[0] == true ? 'Unlike' : 'Like');
                     var comments = docs[i].comments[0];
                     info.append(element.comments.html('<span>Comments</span>(' + comments + ')'));
                     info.append(element.likes.html('<span>' + isLiked + '</span>(' + likes + ')'));
