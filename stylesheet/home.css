@@ -33,11 +33,11 @@ nav {
     border: solid rgba(0, 190, 191, 0.8) 2px;
     padding: 0px 10px;
     width: 200px;
-    cursor: pointer; }
+    cursor: pointer;
+    height: 1em;
+    overflow: scroll; }
     nav .select .select-title {
-      padding: 5px;
-      height: 1em;
-      overflow: scroll; }
+      padding: 5px; }
       nav .select .select-title .fa {
         margin-left: 20px; }
     nav .select .options {

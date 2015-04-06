@@ -45,11 +45,12 @@ nav{
     padding: 0px 10px;
     width:200px;
     cursor: pointer;
+    height: 1em;
+    overflow: scroll;
     .select-title{
       //border: solid #fff6f6 2px;
       padding: 5px;
-      height: 1em;
-      overflow: scroll;
+
 
     .fa{
       margin-left: 20px;
