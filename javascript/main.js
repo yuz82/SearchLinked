@@ -26,6 +26,8 @@ function onSuccess(data) {
             args.group.push(data.groupMemberships.values[i].group.name);
         }
         args.all = groups.length;
+        console.log(args.group);
+        console.log(groups);
         for (i = 0; i < groups.length; i++) {
             window.thisTime = i;
             var d = new Date();
@@ -70,10 +72,11 @@ function insert(data) {
 
         }
 
-        //console.log('image', image);
+
         var id = posts[i].id;
         var user = args.name;
         var group = args.group[args.count - 1];
+        //console.log(args.all, args.count, group);
         index(id, title, creator, summary, timestamp, group, user, image);
     }
     if (args.count == args.all) {
