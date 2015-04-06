@@ -21,9 +21,9 @@ function Component() {
 }
 
 function init(user) {
+    //clear();
 
     var query = '*:*';
-    //console.log(user);
     $.ajax({
         'url': 'http://www.liaokaien.com:8983/solr/search/select?rows=500&fq=user%3D' + user + '&q=' + encodeURIComponent(query) + '&wt=json',
         type: 'GET',
@@ -48,7 +48,7 @@ function init(user) {
                     post.append(element.info);
                     post.append(element.operation);
                     var group = post.find('.group');
-                    //console.log(docs[i].image[0]);
+                    console.log(docs[i]);
                     group.prepend(element.image.attr('src', docs[i].image[0]));
                     var title = post.find('.title');
                     title.append('<br>');
@@ -60,15 +60,19 @@ function init(user) {
                     time = time.replace('Z', ' ');
                     time = time.substring(0, 10);
                     var info = post.find('.info');
-                    info.append(element.comments.html('<span>Comments</span>(' + '0)'));
-                    info.append(element.likes.html('<span>Likes</span>(' + '0)'));
-                    info.append(element.follow.html('<span>Follow</span>'));
+                    var isFollowing = docs[i].isFollowing[0];
+                    var likes = docs[i].likes[0];
+                    var isLiked = docs[i].isLiked[0];
+                    var comments = docs[i].comments[0];
+                    info.append(element.comments.html('<span>Comments</span>(' + comments + ')'));
+                    info.append(element.likes.html('<span>' + isLiked + '</span>(' + likes + ')'));
+                    info.append(element.follow.html('<span>' + isFollowing + '</span>'));
                     var operation = post.find('.operation');
                     operation.append(element.textbox.attr('placeholder', 'Add a comment'));
                     operation.append(element.button.attr('value', 'Submit'));
                 }
                 for (i = 0; i < groupList.length; i++) {
-                   var op = new Component();
+                    var op = new Component();
                     $('.options').append(op.option.text(groupList[i]));
                 }
 
@@ -166,7 +170,7 @@ function clear() {
 }
 
 
-function Document(id, title, creator, summary, time, group, user, image) {
+function Document(id, title, creator, summary, time, group, user, image, comments, likes, isFollowing, isLiked) {
     this.add = {};
     this.add.doc = {};
     this.add.doc.id = id;
@@ -177,18 +181,25 @@ function Document(id, title, creator, summary, time, group, user, image) {
     this.add.doc.image = image;
     this.add.doc.user = user;
     this.add.doc.group = group;
+    this.add.doc.comments = comments;
+    this.add.doc.likes = likes;
+    this.add.doc.isFollowing = isFollowing;
+    this.add.doc.isLiked = isLiked;
+
 
     this.add.boost = 1.0;
     this.add.overwrite = true;
-    this.add.commitWithin = 1000;
-    this.add.optimize = true;
+    this.add.commitWithin = 5000;
+    this.optimize = {
+        "waitSearcher": false
+    };
 }
 
-function index(id, title, creator, summary, time, group, user, image) {
+function index(id, title, creator, summary, time, group, user, image, comments, likes, isFollowing, isLiked) {
 
 
-    var data = new Document(id, title, creator, summary, time, group, user, image);
-    console.log('data:', data.add.doc.group);
+    var data = new Document(id, title, creator, summary, time, group, user, image, comments, likes, isFollowing, isLiked);
+    console.log('data:', data.add.doc.comments);
     $.ajax({
         url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
         contentType: 'application/json',

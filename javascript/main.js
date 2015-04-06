@@ -11,6 +11,7 @@ var args = {
 };
 
 function onLinkedInLoad() {
+        //clear();
         console.log('onload');
         IN.Event.on(IN, "auth", getProfileData);
 
@@ -48,7 +49,7 @@ function getProfileData() {
 function getTopic(group) {
     var d = new Date();
     console.log("getTopic:", d.getTime(), group.name);
-    var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp)?count=50";
+    var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp,likes,comments,relation-to-viewer)?count=50";
     //console.log(q);
     IN.API.Raw(q).result(insert).error(onError);
 }
@@ -75,9 +76,13 @@ function insert(data) {
 
         var id = posts[i].id;
         var user = args.name;
+        var comments = posts[i].comments._total;
+        var likes = posts[i].likes._total;
+        var isLiked = posts[i].relationToViewer.isLiked;
+        var isFollowing = posts[i].relationToViewer.isFollowing;
         var group = args.group[args.count - 1];
         //console.log(args.all, args.count, group);
-        index(id, title, creator, summary, timestamp, group, user, image);
+        index(id, title, creator, summary, timestamp, group, user, image, comments, likes, isFollowing, isLiked);
     }
     if (args.count == args.all) {
         location = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + args.name;
