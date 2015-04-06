@@ -44,12 +44,13 @@ nav{
     border: solid rgba(0, 190, 191, 0.8) 2px;
     padding: 0px 10px;
     width:200px;
+    cursor: pointer;
     .select-title{
       //border: solid #fff6f6 2px;
       padding: 5px;
       height: 1em;
       overflow: scroll;
-      cursor: pointer;
+
     .fa{
       margin-left: 20px;
     }

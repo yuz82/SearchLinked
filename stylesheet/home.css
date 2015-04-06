@@ -32,12 +32,12 @@ nav {
     list-style-type: none;
     border: solid rgba(0, 190, 191, 0.8) 2px;
     padding: 0px 10px;
-    width: 200px; }
+    width: 200px;
+    cursor: pointer; }
     nav .select .select-title {
       padding: 5px;
       height: 1em;
-      overflow: scroll;
-      cursor: pointer; }
+      overflow: scroll; }
       nav .select .select-title .fa {
         margin-left: 20px; }
     nav .select .options {
