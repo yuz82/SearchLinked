@@ -34,23 +34,25 @@ nav {
     padding: 0px 10px;
     width: 200px;
     cursor: pointer;
-    height: 1em;
-    overflow: scroll; }
-    nav .select .select-title {
-      padding: 5px; }
-      nav .select .select-title .fa {
+    overflow: scroll;
+    line-height: 1.2em; }
+    nav .select .select_title {
+      line-height: 1.8em;
+      height: 1.8em; }
+      nav .select .select_title .fa {
         margin-left: 20px; }
     nav .select .options {
       display: none;
       background-color: rgba(0, 190, 191, 0.8);
       position: absolute;
-      top: 40px;
+      top: 52px;
       left: 132px;
       list-style-type: none;
-      padding: 0 10px;
-      width: 204px; }
+      width: 184px; }
       nav .select .options li {
-        height: 1em;
+        margin-left: -28px;
+        line-height: 1.2em;
+        height: 1.2em;
         overflow: scroll;
         cursor: pointer; }
   nav input[type="search"] {

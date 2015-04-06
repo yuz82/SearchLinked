@@ -45,11 +45,14 @@ nav{
     padding: 0px 10px;
     width:200px;
     cursor: pointer;
-    height: 1em;
     overflow: scroll;
-    .select-title{
+    line-height: 1.2em;
+
+    .select_title{
       //border: solid #fff6f6 2px;
-      padding: 5px;
+
+      line-height: 1.8em;
+      height: 1.8em;
 
 
     .fa{
@@ -61,13 +64,14 @@ nav{
       //border: solid #fa8072 1px;
       background-color: rgba(0, 190, 191, 0.8);
       position:absolute;
-      top:40px;
+      top:52px;
       left:132px;
       list-style-type: none;
-      padding:0 10px;
-      width: 204px;
+      width: 184px;
       li{
-        height:1em;
+        margin-left: -28px;
+        line-height: 1.2em;
+        height:1.2em;
         overflow: scroll;
         cursor: pointer;
       }
