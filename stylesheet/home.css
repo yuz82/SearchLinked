@@ -68,7 +68,8 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 45px; }
+  margin-top: 45px;
+  padding-top: 45px; }
   .main article {
     width: 60%;
     align-self: center;
