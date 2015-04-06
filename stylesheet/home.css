@@ -53,7 +53,7 @@ nav {
         margin-left: -28px;
         line-height: 1.2em;
         height: 1.2em;
-        overflow: scroll;
+        overflow: hidden;
         cursor: pointer; }
   nav input[type="search"] {
     color: #101a23;
