@@ -55,10 +55,17 @@ nav{
 
   input[type="search"]{
     color: #101a23;
-   // border: solid #00bf8f 2px;
     margin-right: 32px;
+    padding-left: 20px;
     height: 26px;
     font-family: $lato;
+  }
+
+  #icon_search{
+    position: absolute;
+    margin-top: 24px;
+    margin-left: -55px;
+    color: #a9a9a9;
   }
 }
 
@@ -147,7 +154,6 @@ nav{
       }
 
       input[type='button']{
-        border-left: auto;
         background-color: #008889;
         color: #ffffff;
         height: 32px;
