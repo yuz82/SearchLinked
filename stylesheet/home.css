@@ -45,9 +45,10 @@ nav {
       left: 132px;
       list-style-type: none;
       padding: 0 10px;
-      width: 204px;
-      height: 1em;
-      overflow: scroll; }
+      width: 204px; }
+      nav .select .options li {
+        height: 1em;
+        overflow: scroll; }
   nav input[type="search"] {
     color: #101a23;
     margin-right: 32px;

@@ -61,9 +61,10 @@ nav{
       list-style-type: none;
       padding:0 10px;
       width: 204px;
-      height:1em;
-      overflow: scroll;
-
+      li{
+        height:1em;
+        overflow: scroll;
+      }
     }
   }
 
