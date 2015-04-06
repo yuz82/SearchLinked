@@ -47,6 +47,9 @@ nav{
     .select-title{
       //border: solid #fff6f6 2px;
       padding: 5px;
+      height: 1em;
+      overflow: scroll;
+      cursor: pointer;
     .fa{
       margin-left: 20px;
     }
@@ -64,6 +67,7 @@ nav{
       li{
         height:1em;
         overflow: scroll;
+        cursor: pointer;
       }
     }
   }
