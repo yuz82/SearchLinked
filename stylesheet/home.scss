@@ -41,15 +41,26 @@ nav{
     margin-left: 5%;
     margin-right: 20px;
     list-style-type: none;
+    border: solid rgba(0, 190, 191, 0.8) 2px;
+    padding: 0px 10px;
     .select-title{
-      border: solid #fff6f6 2px;
+      //border: solid #fff6f6 2px;
       padding: 5px;
     .fa{
       margin-left: 20px;
     }
     }
     .options{
-     display: none;
+     display:none;
+      //border: solid #fa8072 1px;
+      background-color: rgba(0, 190, 191, 0.8);
+      position:absolute;
+      top:40px;
+      left:125px;
+      list-style-type: none;
+      padding:0 10px;
+      width: 89px;
+
     }
   }
 
@@ -61,10 +72,9 @@ nav{
     font-family: $lato;
   }
 
-  #icon_search{
-    position: absolute;
-    margin-top: 24px;
-    margin-left: -55px;
+  .fa-search{
+    position: relative;
+   left: -235px;
     color: #a9a9a9;
   }
 }

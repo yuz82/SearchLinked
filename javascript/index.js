@@ -18,7 +18,7 @@ function Component() {
     this.button = $('<input/>').attr('type', 'button');
     this.image = $('<img></img>').attr('alt', 'creator\'s avatar');
     this.option = $('<li></li>').addClass('option');
-};
+}
 
 function init(user) {
 
@@ -68,13 +68,14 @@ function init(user) {
                     operation.append(element.button.attr('value', 'Submit'));
                 }
                 for (i = 0; i < groupList.length; i++) {
-                    element = new Component();
-                    $('.options').append(element.option.text(groupList[i]));
+                   var op = new Component();
+                    $('.options').append(op.option.text(groupList[i]));
                 }
 
                 //console.log($('.option').length);
 
                 $('.select_title').click(function() {
+                    console.log('toggle');
                     $('.options').toggle();
                 });
 
@@ -159,7 +160,7 @@ function clear() {
             });
 
         }
-    });;
+    });
     //clean docs in this idset
 
 }
@@ -180,6 +181,7 @@ function Document(id, title, creator, summary, time, group, user, image) {
     this.add.boost = 1.0;
     this.add.overwrite = true;
     this.add.commitWithin = 1000;
+    this.add.optimize = true;
 }
 
 function index(id, title, creator, summary, time, group, user, image) {
