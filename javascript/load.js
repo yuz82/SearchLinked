@@ -8,24 +8,9 @@ $(document).ready(function() {
     data.redirect_uri = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + user.id;
     data.grant_type = 'authorization_code';
     data.code = getUrlParameter('code');
+    console.log(data);
 
 
-    $.ajax({
-        url: url,
-        crossDomain: true,
-        dataType: 'jsonp',
-        data: data,
-        type: 'POST',
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function(data) {
-            alert(data);
-        },
-        error: function(data) {
-            console.log('error');
-        }
-    });
     init(user.id); // load documents.
 
     var searchButton = $('nav').find('input[type=\'button\']');
