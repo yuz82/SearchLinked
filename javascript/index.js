@@ -25,7 +25,7 @@ function init(user) {
 
     var query = '*:*';
     $.ajax({
-        'url': 'http://www.liaokaien.com:8983/solr/search/select?rows=500&fq=user%3D' + user + '&q=' + encodeURIComponent(query) + '&wt=json',
+        'url': 'http://www.liaokaien.com:8983/solr/search/select?rows=200&fq=user%3D' + user + '&q=' + encodeURIComponent(query) + '&wt=json',
         type: 'GET',
         'success': function(data) { /* process e.g. data.response.docs... */
                 var groupList = [];
@@ -48,7 +48,7 @@ function init(user) {
                     post.append(element.info);
                     post.append(element.operation);
                     var group = post.find('.group');
-                    console.log(docs[i]);
+                    // console.log(docs[i]);
                     group.prepend(element.image.attr('src', docs[i].image[0]));
                     var title = post.find('.title');
                     title.append('<br>');
@@ -60,7 +60,7 @@ function init(user) {
                     time = time.replace('Z', ' ');
                     time = time.substring(0, 10);
                     var info = post.find('.info');
-                    var isFollowing = (docs[i].isFollowing[0] == true ? 'Unfollow' : 'follow');
+                    var isFollowing = (docs[i].isFollowing[0] == true ? 'Unfollow' : 'Follow');
                     var likes = docs[i].likes[0];
                     var isLiked = (docs[i].isLiked[0] == true ? 'Unlike' : 'Like');
                     var comments = docs[i].comments[0];
@@ -70,6 +70,8 @@ function init(user) {
                     var operation = post.find('.operation');
                     operation.append(element.textbox.attr('placeholder', 'Add a comment'));
                     operation.append(element.button.attr('value', 'Submit'));
+
+
                 }
                 for (i = 0; i < groupList.length; i++) {
                     var op = new Component();
@@ -79,7 +81,7 @@ function init(user) {
                 //console.log($('.option').length);
 
                 $('.select_title').click(function() {
-                    console.log('toggle');
+                    //console.log('toggle');
                     $('.options').toggle();
                 });
 
@@ -94,14 +96,29 @@ function init(user) {
                             if ($(this).text() !== groupname) {
                                 $(this).parent().hide();
                             } else {
-                                console.log($(this).text());
+                                // console.log($(this).text());
                                 $(this).parent().show();
                             }
                         });
                     } else {
-                        console.log('all');
+                        //console.log('all');
                         $('.post').show();
                     }
+                });
+                // sent httprequest.
+                $('.likes').click(function() {
+                    var isLiked = $(this).find('span').text();
+                    var data = {
+                        'is-liked': (isLiked == 'Like' ? true : false)
+                    };
+
+                    var id = $(this).parent().parent().attr('id');
+
+                    //IN.API.Raw("/posts/" + id + '/relation-to-viewer/is-liked').method('PUT').body(JSON.stringify(data)).result(onSuccess);
+                });
+
+                $('.follow').click(function() {
+                    //console.log($(this).find('span').text());
                 });
             } // end loop
 
@@ -185,7 +202,7 @@ function Document(id, title, creator, summary, time, group, user, image, comment
     this.add.doc.likes = likes;
     this.add.doc.isFollowing = isFollowing;
     this.add.doc.isLiked = isLiked;
-
+    5
 
     this.add.boost = 1.0;
     this.add.overwrite = true;
@@ -199,7 +216,7 @@ function index(id, title, creator, summary, time, group, user, image, comments, 
 
 
     var data = new Document(id, title, creator, summary, time, group, user, image, comments, likes, isFollowing, isLiked);
-    console.log('data:', data.add.doc.comments);
+    //console.log('data:', data.add.doc.comments);
     $.ajax({
         url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
         contentType: 'application/json',
@@ -213,3 +230,7 @@ function index(id, title, creator, summary, time, group, user, image, comments, 
 }
 
 //
+
+function onSuccess(data) {
+    console.log(data);
+}

@@ -20,19 +20,19 @@ function onLinkedInLoad() {
 function onSuccess(data) {
         var groups = [];
         args.name = data.id;
-        console.log(args.name);
+        //console.log(args.name);
 
         for (var i = 0; i < data.groupMemberships._total; i++) {
             groups.push(data.groupMemberships.values[i].group);
             args.group.push(data.groupMemberships.values[i].group.name);
         }
         args.all = groups.length;
-        console.log(args.group);
-        console.log(groups);
+        //console.log(args.group);
+        //console.log(groups);
         for (i = 0; i < groups.length; i++) {
             window.thisTime = i;
             var d = new Date();
-            console.log(thisTime, d.getTime());
+            //console.log(thisTime, d.getTime());
             getTopic(groups[i]);
         }
     }
@@ -48,7 +48,7 @@ function getProfileData() {
 
 function getTopic(group) {
     var d = new Date();
-    console.log("getTopic:", d.getTime(), group.name);
+    //console.log("getTopic:", d.getTime(), group.name);
     var q = "/groups/" + group.id + "/posts:(id,summary,creator,title,creation-timestamp,likes,comments,relation-to-viewer)?count=50";
     //console.log(q);
     IN.API.Raw(q).result(insert).error(onError);
@@ -85,6 +85,8 @@ function insert(data) {
         index(id, title, creator, summary, timestamp, group, user, image, comments, likes, isFollowing, isLiked);
     }
     if (args.count == args.all) {
-        location = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + args.name;
+        //get auth2.0 token again 
+        //location = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + args.name;
+        location = 'https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=78uift3465j6c6&scope=r_fullprofile%20rw_groups&state=1DJ3j18P917Ox7sN&redirect_uri=http://www.liaokaien.com:8983/solr/search/index.html?id=' + id;
     }
 }
