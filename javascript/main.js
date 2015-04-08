@@ -87,6 +87,6 @@ function insert(data) {
     if (args.count == args.all) {
         //get auth2.0 token again 
         //location = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + args.name;
-        location = 'https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=78uift3465j6c6&scope=r_fullprofile%20rw_groups&state=1DJ3j18P917Ox7sN&redirect_uri=http://www.liaokaien.com:8983/solr/search/index.html?id=' + id;
+        location = 'https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=78uift3465j6c6&scope=r_fullprofile%20rw_groups&state=1DJ3j18P917Ox7sN&redirect_uri=http://localhost:8983/solr/search/index.html?id=' + id;
     }
 }

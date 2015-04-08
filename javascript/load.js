@@ -5,20 +5,21 @@ $(document).ready(function() {
     var data = {};
     data.client_id = '78uift3465j6c6';
     data.client_secret = '0FDCfIXfPZzrlIxe';
-    data.redirect_uri = 'http://www.liaokaien.com:8983/solr/search/index.html?id=' + user.id;
+    data.redirect_uri = 'http://localhost:8983/solr/search/index.html?id=' + user.id;
     data.grant_type = 'authorization_code';
     data.code = getUrlParameter('code');
     console.log(data);
 
     $.ajax({
-        url: url,
-        crossOrigin: true,
-        type: 'POST',
-        data: data,
-        success: function(data) {
+        url: 'http://localhost:8983/solr/like',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
             console.log(data);
+        },
+        error: function (error){
+            console.log(error);
         }
-
     });
 
 

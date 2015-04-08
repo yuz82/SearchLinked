@@ -25,7 +25,7 @@ function init(user) {
 
     var query = '*:*';
     $.ajax({
-        'url': 'http://www.liaokaien.com:8983/solr/search/select?rows=200&fq=user%3D' + user + '&q=' + encodeURIComponent(query) + '&wt=json',
+        'url': 'http://localhost:8983/solr/search/select?rows=200&fq=user%3D' + user + '&q=' + encodeURIComponent(query) + '&wt=json',
         type: 'GET',
         'success': function(data) { /* process e.g. data.response.docs... */
                 var groupList = [];
@@ -130,7 +130,7 @@ function init(user) {
 function search(q) {
     var query = q;
     $.ajax({
-        'url': 'http://www.liaokaien.com:8983/solr/search/select?q=' + encodeURIComponent(query) +
+        'url': 'http://localhost:8983/solr/search/select?q=' + encodeURIComponent(query) +
             '&wt=json&rows=200',
         type: 'GET',
         'success': function(data) { /* process e.g. data.response.docs... */
@@ -202,8 +202,6 @@ function Document(id, title, creator, summary, time, group, user, image, comment
     this.add.doc.likes = likes;
     this.add.doc.isFollowing = isFollowing;
     this.add.doc.isLiked = isLiked;
-    5
-
     this.add.boost = 1.0;
     this.add.overwrite = true;
     this.add.commitWithin = 5000;
@@ -218,7 +216,7 @@ function index(id, title, creator, summary, time, group, user, image, comments, 
     var data = new Document(id, title, creator, summary, time, group, user, image, comments, likes, isFollowing, isLiked);
     //console.log('data:', data.add.doc.comments);
     $.ajax({
-        url: 'http://www.liaokaien.com:8983/solr/search/update?wt=json',
+        url: 'http://localhost:8983/solr/search/update?wt=json',
         contentType: 'application/json',
         processData: false,
         data: JSON.stringify(data),
