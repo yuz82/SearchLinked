@@ -10,6 +10,17 @@ $(document).ready(function() {
     data.code = getUrlParameter('code');
     console.log(data);
 
+    $.ajax({
+        url: url,
+        crossOrigin: true,
+        type: 'POST',
+        data: data,
+        success: function(data) {
+            console.log(data);
+        }
+
+    });
+
 
     init(user.id); // load documents.
 
