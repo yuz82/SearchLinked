@@ -3,6 +3,7 @@ $(document).ready(function() {
     user.id = getUrlParameter('id');
     var url = 'https://www.linkedin.com/uas/oauth2/accessToken';
     var data = {};
+    var isSorted = false;
     data.client_id = '78uift3465j6c6';
     data.client_secret = '0FDCfIXfPZzrlIxe';
     data.redirect_uri = 'http://localhost:8983/solr/search/index.html?id=' + user.id;
@@ -14,10 +15,10 @@ $(document).ready(function() {
         url: 'http://localhost:8983/solr/like',
         type: 'GET',
         dataType: 'json',
-        success: function (data) {
+        success: function(data) {
             console.log(data);
         },
-        error: function (error){
+        error: function(error) {
             console.log(error);
         }
     });
@@ -46,6 +47,42 @@ $(document).ready(function() {
             $('.post').show();
             //console.log('show!');
         }
+    });
+
+    $('#btn-sort').click(function() {
+        if (!isSorted) {
+            console.log(isSorted);
+            var sortLabel = document.getElementsByTagName('nav')[0].getElementsByTagName('div')[0].getElementsByTagName('label')[0];
+            sortLabel.childNodes[0].nodeValue = 'Sort by time';
+            var timeSections = document.getElementsByClassName('time');
+            var originalList = [];
+            for (var i = 0; i < timeSections.length; i++) {
+                if (timeSections[i].childNodes[0]) {
+                    var text = timeSections[i].childNodes[0].wholeText;
+                    originalList.push(parseInt(text.slice(0, 4) + text.slice(5, 7) + text.slice(8)));
+                }
+            }
+            var sortedList = insertionSort(originalList);
+            for (i = 0; i < timeSections.length; i++) {
+                if (timeSections[i].childNodes[0]) {
+                    timeSections[i].parentNode.parentNode.style.order = sortedList.indexOf(originalList[i]);
+                }
+            }
+            isSorted = true;
+        } else {
+            console.log('sort by score');
+            var timeSortLabel = document.getElementsByTagName('nav')[0].getElementsByTagName('div')[0].getElementsByTagName('label')[0];
+            console.log(timeSortLabel.tagName.childNodes);
+            timeSortLabel.childNodes[0].nodeValue = 'Sort by score';
+            var timeSectionSorted = document.getElementsByClassName('time');
+            for (var x = 0; x < timeSectionSorted.length; x++) {
+                if (timeSectionSorted[x].childNodes[0]) {
+                    timeSectionSorted[x].parentNode.parentNode.style.removeProperty('order');
+                }
+            }
+            isSorted = false;
+        }
+
     });
 });
 

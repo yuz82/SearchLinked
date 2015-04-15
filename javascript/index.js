@@ -1,6 +1,28 @@
 /**
  * Created by liaokaien on 3/11/15.
  */
+function insertionSort(items) {
+    var result = [];
+    for (var q = 0; q < items.length; q++) {
+        result.push(items[q]);
+    }
+
+    var len = result.length, // number of result in the array
+        value, // the value currently being compared
+        i, // index into unsorted section
+        j; // index into sorted section
+
+    for (i = 0; i < len; i++) {
+        value = result[i];
+        for (j = i - 1; j > -1 && result[j] < value; j--) {
+            result[j + 1] = result[j];
+        }
+
+        result[j + 1] = value;
+    }
+
+    return result;
+}
 
 function Component() {
     this.post = $('<article></article>').addClass('post');
@@ -22,6 +44,8 @@ function Component() {
 
 function init(user) {
     //clear();
+    var before = [2034, 1155, 3098, 2182];
+    console.log(insertionSort(before));
 
     var query = '*:*';
     $.ajax({
@@ -60,10 +84,11 @@ function init(user) {
                     time = time.replace('Z', ' ');
                     time = time.substring(0, 10);
                     var info = post.find('.info');
-                    var isFollowing = (docs[i].isFollowing[0] == true ? 'Unfollow' : 'Follow');
+                    var isFollowing = (docs[i].isFollowing[0] === true ? 'Unfollow' : 'Follow');
                     var likes = docs[i].likes[0];
-                    var isLiked = (docs[i].isLiked[0] == true ? 'Unlike' : 'Like');
+                    var isLiked = (docs[i].isLiked[0] === true ? 'Unlike' : 'Like');
                     var comments = docs[i].comments[0];
+
                     info.append(element.comments.html('<span>Comments</span>(' + comments + ')'));
                     info.append(element.likes.html('<span>' + isLiked + '</span>(' + likes + ')'));
                     info.append(element.follow.html('<span>' + isFollowing + '</span>'));
@@ -214,7 +239,7 @@ function index(id, title, creator, summary, time, group, user, image, comments, 
 
 
     var data = new Document(id, title, creator, summary, time, group, user, image, comments, likes, isFollowing, isLiked);
-    //console.log('data:', data.add.doc.comments);
+    console.log(time);
     $.ajax({
         url: 'http://localhost:8983/solr/search/update?wt=json',
         contentType: 'application/json',

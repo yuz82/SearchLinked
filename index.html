@@ -4,46 +4,43 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>SearchLinked</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato|Droid+Serif|Open+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="stylesheet/normalize.css"/>
-    <link rel="stylesheet" href="stylesheet/home.css"/>
-
+    <link rel="stylesheet" href="stylesheet/normalize.css" />
+    <link rel="stylesheet" href="stylesheet/home.css" />
 </head>
 
 <body>
-<nav>
-
-    <img src="images/icon.png" alt="search linkedin"/>
-    <ul class = "select">
-        <li class="select_title"><span id="group_name">All groups </span><i class="fa fa-caret-down"></i></li>
-        <li>
-        <ul class="options">
-            <li class="option">All groups</li>
+    <nav>
+        <img src="images/icon.png" alt="search linkedin" />
+        <ul class="select">
+            <li class="select_title"><span id="group_name">All groups </span><i class="fa fa-caret-down"></i></li>
+            <li>
+                <ul class="options">
+                    <li class="option">All groups</li>
+                </ul>
+            </li>
         </ul>
-        </li>
-
-    </ul>
-
-    <input type="search" placeholder=" Search by keywords"/><i class="fa fa-search" id="icon_search"></i>
-    <input type="button" value="Search"/>
-
-</nav>
-
-<section class="main">
-</section>
-
-<footer>
-    <p>Supported by Solr</p>
-    <p>&nbsp;&nbsp;|&nbsp;&nbsp;IR Final Project Group 4&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-    <p id="info">About us</p>
-</footer>
-<!--Other Script. You can not move or change them -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="javascript/index.js"></script>
-<script src="javascript/load.js"></script>
+        <input type="search" placeholder=" Search by keywords" /><i class="fa fa-search" id="icon_search"></i>
+        <input type="button" value="Search" />
+        <div>
+            <i class="fa fa-sort-amount-asc" id="btn-sort"></i>
+            <label for="btn-sort">Sort by time</label>
+        </div>
+    </nav>
+    <section class="main">
+    </section>
+    <footer>
+        <p>Supported by Solr</p>
+        <p>&nbsp;&nbsp;|&nbsp;&nbsp;IR Final Project Group 4&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+        <p id="info">About us</p>
+    </footer>
+    <!--Other Script. You can not move or change them -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="javascript/index.js"></script>
+    <script src="javascript/load.js"></script>
 </body>
 
 </html>
