@@ -44,8 +44,6 @@ function Component() {
 
 function init(user) {
     //clear();
-    var before = [2034, 1155, 3098, 2182];
-    console.log(insertionSort(before));
 
     var query = '*:*';
     $.ajax({
@@ -76,13 +74,14 @@ function init(user) {
                     group.prepend(element.image.attr('src', docs[i].image[0]));
                     var title = post.find('.title');
                     title.append('<br>');
-                    title.append(element.time.text(time));
-                    title.append(element.author.text(' | by ' + docs[i].creator));
                     var time = docs[i].time[0];
-                    //console.log(docs[i].time);
                     time = time.replace('T', ' ');
                     time = time.replace('Z', ' ');
                     time = time.substring(0, 10);
+                    console.log(time, docs[i].title);
+                    title.append(element.time.text(time));
+                    title.append(element.author.text(' | by ' + docs[i].creator));
+
                     var info = post.find('.info');
                     var isFollowing = (docs[i].isFollowing[0] === true ? 'Unfollow' : 'Follow');
                     var likes = docs[i].likes[0];
@@ -173,7 +172,15 @@ function search(q) {
                 }
 
             });
-
+            var timeSortLabel = document.getElementsByTagName('nav')[0].getElementsByTagName('div')[0].getElementsByTagName('label')[0];
+            timeSortLabel.childNodes[0].nodeValue = 'Sort by score';
+            var timeSectionSorted = document.getElementsByClassName('time');
+            for (var x = 0; x < timeSectionSorted.length; x++) {
+                if (timeSectionSorted[x].childNodes[0]) {
+                    timeSectionSorted[x].parentNode.parentNode.style.removeProperty('order');
+                }
+            }
+            isSorted = false;
         }
     });
 }

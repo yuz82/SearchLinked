@@ -60,11 +60,15 @@ $(document).ready(function() {
                 if (timeSections[i].childNodes[0]) {
                     var text = timeSections[i].childNodes[0].wholeText;
                     originalList.push(parseInt(text.slice(0, 4) + text.slice(5, 7) + text.slice(8)));
+                } else {
+                    originalList.push(-1);
                 }
             }
             var sortedList = insertionSort(originalList);
             for (i = 0; i < timeSections.length; i++) {
                 if (timeSections[i].childNodes[0]) {
+                    console.log(timeSections[i].childNodes[0].wholeText, originalList[i]);
+
                     timeSections[i].parentNode.parentNode.style.order = sortedList.indexOf(originalList[i]);
                 }
             }
@@ -72,7 +76,6 @@ $(document).ready(function() {
         } else {
             console.log('sort by score');
             var timeSortLabel = document.getElementsByTagName('nav')[0].getElementsByTagName('div')[0].getElementsByTagName('label')[0];
-            console.log(timeSortLabel.tagName.childNodes);
             timeSortLabel.childNodes[0].nodeValue = 'Sort by score';
             var timeSectionSorted = document.getElementsByClassName('time');
             for (var x = 0; x < timeSectionSorted.length; x++) {
