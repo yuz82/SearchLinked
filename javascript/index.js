@@ -173,7 +173,7 @@ function search(q) {
 
             });
             var timeSortLabel = document.getElementsByTagName('nav')[0].getElementsByTagName('div')[0].getElementsByTagName('label')[0];
-            timeSortLabel.childNodes[0].nodeValue = 'Sort by score';
+            timeSortLabel.childNodes[0].nodeValue = 'Sort by time';
             var timeSectionSorted = document.getElementsByClassName('time');
             for (var x = 0; x < timeSectionSorted.length; x++) {
                 if (timeSectionSorted[x].childNodes[0]) {
